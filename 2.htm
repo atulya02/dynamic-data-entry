@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic Table</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+	<style type="text/css">
+		li{
+			padding: 25px;
+		}
+		
+		div{
+			position: absolute;
+			left: 35%;
+			width:500px;
+		}
+
+		button{
+			position: absolute;
+			left: 45%; 
+			margin-top: 25px;
+		}
+	</style>
+
+</head>
+<body>
+	<div ng-app="myapp" ng-controller="myctrl" style="text-align: center;">
+		<h1>DATA ENTRY</h1>
+		<ul style="list-style-type:none;text-align: center;">
+			<li ng-repeat="x in list" style="border-bottom:1px solid black;width: 90%;padding-left: 0px;background-color: #3498db;text-align: center;">{{x}} <span ng-click="removeItem($index)"><i class="fas fa-times" style="position: absolute;left:90%;"></i></span></li>
+
+		</ul>
+
+		<input type="" name="" ng-model="addme" required placeholder="Enter Name" style="width: 100%;text-align: center;margin-top: 50px;"><br>
+		<button ng-click="addItem()">ADD</button>
+		<p>{{errortext}}</p>
+	</div>
+
+
+	<script>
+		var app=angular.module('myapp',[]);
+		app.controller('myctrl',function($scope){
+			$scope.errortext="";
+			$scope.list=["Atulya","Aditya"];
+			$scope.addItem=function(){
+				if (!$scope.addme) {return;}
+				if ($scope.list.indexOf($scope.addme) == -1) {
+		            $scope.list.push($scope.addme);
+		        } else {
+		            $scope.errortext = "The item is already in your shopping list.";
+		        }
+					};
+
+			$scope.removeItem=function(x){
+				$scope.list.splice(x,1);
+			};
+		});
+
+	</script>
+
+</body>
+</html>
